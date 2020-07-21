@@ -1,0 +1,73 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @train.number %>
+</p>
+
+<strong>Информация о билетах</strong>
+<% if @train.tickets.empty? %>
+ <p>На этот поезд нет билетов</p>
+<% else %>
+  <% @train.tickets.each do |ticket| %>
+    <ul>
+      <li><%= ticket.passenger_name %></li>
+    </ul>
+  <% end %>
+<% end %>
+
+<strong>Маршруты поезда</strong>
+<ul>
+  <% if @train.route.present? %>
+    <li><%= @train.route.name %></li>
+  <% else %>
+    <li>Не указано</li>
+  <% end %>
+</ul>
+
+<strong>Coupe carriages</strong>
+<ul>
+  <% if @train.carriages.coupe.empty? %>
+    <li>Не указано</li>
+  <% else %>
+    <% @train.carriages.coupe.each do |coupe| %>
+      <li><%= coupe.number %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<strong>Economy carriages</strong>
+<ul>
+  <% if @train.carriages.economy.empty? %>
+    <li>Не указано</li>
+  <% else %>
+    <% @train.carriages.economy.each do |economy| %>
+      <li><%= economy.number %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<strong>Sv carriages</strong>
+<ul>
+  <% if @train.carriages.sv.empty? %>
+    <li>Не указано</li>
+  <% else %>
+    <% @train.carriages.sv.each do |sv| %>
+      <li><%= sv.number %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<strong>Seats carriages</strong>
+<ul>
+  <% if @train.carriages.seats.empty? %>
+    <li>Не указано</li>
+  <% else %>
+    <% @train.carriages.seats.each do |seats| %>
+      <li><%= seats.number %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= link_to 'Edit', edit_train_path(@train) %> |
+<%= link_to 'Back', trains_path %>

@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @ticket.passenger_name %>
+</p>
+<p>
+  <strong>На поезд:</strong>
+  <% if @ticket.train %>
+    <li><%= @ticket.train.number %></li>
+  <% else %>
+   <li>Не указано</li>
+  <% end %>
+</p>
+
+<p>
+  <strong>Принадлежит пользователю:</strong>
+  <% if @ticket.user %>
+    <%= @ticket.user.name %>
+  <% else %>
+    <li>Не указано</li>
+  <% end %>
+</p>
+
+
+<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
+<%= link_to 'Back', tickets_path %>

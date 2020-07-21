@@ -1,0 +1,2 @@
+class SvCarriage < Carriage
+end
