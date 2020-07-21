@@ -4,14 +4,6 @@
   <strong>Name:</strong>
   <%= @ticket.passenger_name %>
 </p>
-<p>
-  <strong>На поезд:</strong>
-  <% if @ticket.train %>
-    <li><%= @ticket.train.number %></li>
-  <% else %>
-   <li>Не указано</li>
-  <% end %>
-</p>
 
 <p>
   <strong>Принадлежит пользователю:</strong>
@@ -22,6 +14,25 @@
   <% end %>
 </p>
 
+<p>
+  <strong>На поезд №</strong>
+  <% if @ticket.train %>
+    <%= @ticket.train.number %>
+  <% else %>
+   <li>Не указано</li>
+  <% end %>
+</p>
+
+<p>
+<strong>Маршрут:</strong>
+<% if @ticket.train.route.railway_stations.first.present? %>
+  <%= @ticket.train.route.railway_stations.first.title %>
+  -
+  <%= @ticket.train.route.railway_stations.last.title %>
+<% else %>
+  Not enter
+<% end %>
+</p>
 
 <%= link_to 'Edit', edit_ticket_path(@ticket) %> |
 <%= link_to 'Back', tickets_path %>
