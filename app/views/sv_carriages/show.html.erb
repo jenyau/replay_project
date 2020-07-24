@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<p><strong><%= "#{@sv_carriage.type}" %></p></strong>
 
 <p>
   <strong>Number:</strong>
@@ -10,6 +11,14 @@
 <% else %>
   <p>Не указано</p>
 <% end %>
+<p>
+<strong>Places:</strong>
+<% if @sv_carriage.bottom_seats.present? %>
+  <%= @sv_carriage.bottom_seats %>
+<% else %>
+  не указано
+<% end %>
+</p>
 
 <%= link_to 'Edit', edit_sv_carriage_path(@sv_carriage) %> |
 <%= link_to 'Back', sv_carriages_path %>

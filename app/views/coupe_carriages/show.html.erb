@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<p><strong><%= "#{@coupe_carriage.type}" %></p></strong>
 
 <p>
   <strong>Number:</strong>
@@ -10,6 +11,24 @@
 <% else %>
   <p>Не указано</p>
 <% end %>
+
+<p>
+<strong>Top seats:</strong>
+<% if @coupe_carriage.top_seats.present? %>
+  <%= @coupe_carriage.top_seats %>
+<% else %>
+  не указано
+<% end %>
+</p>
+
+<p>
+<strong>Bottom seats:</strong>
+<% if @coupe_carriage.bottom_seats.present? %>
+  <%= @coupe_carriage.bottom_seats %>
+<% else %>
+  не указано
+<% end %>
+</p>
 
 <%= link_to 'Edit', edit_coupe_carriage_path(@coupe_carriage) %> |
 <%= link_to 'Back', coupe_carriages_path %>

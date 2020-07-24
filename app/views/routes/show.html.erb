@@ -21,9 +21,20 @@
   <% if @route.railway_stations.empty? %>
     <li>Не указано</li>
   <% else %>
-    <% @route.railway_stations.each do |station| %>
-      <li><%= station.title %></li>
+  <table>
+  <tbody>
+    <% @route.railway_stations.ordered.each do |station| %>
+      <tr>
+      <td><%= station.title %></td>
+      <td><%= form_tag update_position_railway_station_path(station), method: :patch do %>
+        <%= hidden_field_tag :route_id, @route.id %>
+        <%= number_field_tag :station_position, station.position_in(@route.id) %></td>
+        <td><%= submit_tag %></td>
+      <% end %>
+      </tr>
     <% end %>
+    </tbody>
+  </table>
   <% end %>
 </ul>
 

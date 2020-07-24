@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :sv_carriages
   resources :seats_carriages
   resources :routes
-  resources :railway_stations
+  resources :railway_stations do
+    patch :update_position, on: :member
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

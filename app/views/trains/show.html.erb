@@ -5,6 +5,15 @@
   <%= @train.number %>
 </p>
 
+<strong>Маршрут поезда</strong>
+<ul>
+  <% if @train.route.present? %>
+    <li><%= @train.route.name %></li>
+  <% else %>
+    <li>Не указано</li>
+  <% end %>
+</ul>
+
 <strong>Информация о билетах</strong>
 <% if @train.tickets.empty? %>
  <p>На этот поезд нет билетов</p>
@@ -16,58 +25,80 @@
   <% end %>
 <% end %>
 
-<strong>Маршруты поезда</strong>
-<ul>
-  <% if @train.route.present? %>
-    <li><%= @train.route.name %></li>
-  <% else %>
-    <li>Не указано</li>
-  <% end %>
-</ul>
+<p><strong>Coupe carriages</strong></p>
 
-<strong>Coupe carriages</strong>
+<strong>Total top places:</strong>
+<%= @train.total_places("CoupeCarriage", "top_seats") %><br>
+
+<strong>Total bottom places:</strong>
+<%= @train.total_places("CoupeCarriage", "bottom_seats") %><br>
+
 <ul>
   <% if @train.carriages.coupe.empty? %>
     <li>Не указано</li>
   <% else %>
     <% @train.carriages.coupe.each do |coupe| %>
-      <li><%= coupe.number %></li>
+      <li><%= link_to "#{coupe.number}", coupe_carriage_path(coupe) %></li>
     <% end %>
   <% end %>
 </ul>
 
-<strong>Economy carriages</strong>
+<p><strong>Economy carriages</strong></p>
+
+<strong>Total top places:</strong>
+<%= @train.total_places("EconomyCarriage", "top_seats") %><br>
+
+<strong>Total bottom places:</strong>
+<%= @train.total_places("EconomyCarriage", "bottom_seats") %><br>
+
+<strong>Total side top seats:</strong>
+<%= @train.total_places("EconomyCarriage", "side_top_seats") %><br>
+
+<strong>Total side bottom_seats:</strong>
+<%= @train.total_places("EconomyCarriage", "side_bottom_seats") %><br>
+
 <ul>
   <% if @train.carriages.economy.empty? %>
     <li>Не указано</li>
   <% else %>
     <% @train.carriages.economy.each do |economy| %>
-      <li><%= economy.number %></li>
+      <li><%= link_to "#{economy.number}", economy_carriage_path(economy) %></li>
     <% end %>
   <% end %>
 </ul>
 
-<strong>Sv carriages</strong>
+<p><strong>Sv carriages</strong></p>
+
+<strong>Total Sv places:</strong>
+<%= @train.total_places("SvCarriage", "bottom_seats") %><br>
+
 <ul>
   <% if @train.carriages.sv.empty? %>
     <li>Не указано</li>
   <% else %>
     <% @train.carriages.sv.each do |sv| %>
-      <li><%= sv.number %></li>
+      <li><%= link_to "#{sv.number}", sv_carriage_path(sv) %></li>
     <% end %>
   <% end %>
 </ul>
 
-<strong>Seats carriages</strong>
+<p><strong>Seats carriages</strong></p>
+<strong>Total seat places:</strong>
+<%= @train.total_places("SeatsCarriage", "seat_places") %><br>
+
 <ul>
   <% if @train.carriages.seats.empty? %>
     <li>Не указано</li>
   <% else %>
     <% @train.carriages.seats.each do |seats| %>
-      <li><%= seats.number %></li>
+      <li><%= link_to "#{seats.number}", seats_carriage_path(seats) %></li>
     <% end %>
   <% end %>
 </ul>
+
+<% @train.carriages.desc.each do |car| %>
+  <%= car.number %><br>
+<% end %>
 
 <%= link_to 'Edit', edit_train_path(@train) %> |
 <%= link_to 'Back', trains_path %>

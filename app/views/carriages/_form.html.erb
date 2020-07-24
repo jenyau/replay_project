@@ -1,7 +1,6 @@
 <%= form_for(carriage) do |form| %>
   <%= render 'common/errors', resource: carriage %>
 
-
   <div class="field">
     <%= form.label :type %>
     <%= form.select :type, [["Economy", "EconomyCarriage"], ['Coupe', 'CoupeCarriage'],
@@ -33,7 +32,7 @@
     <%= form.text_field :side_bottom_seats %>
   </div>
 
-  <div class="field" id="seat_places">
+  <div class="field" id="carriage_seat_places">
     <%= form.label :seat_places %>
     <%= form.text_field :seat_places %>
   </div>

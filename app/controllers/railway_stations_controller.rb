@@ -1,14 +1,10 @@
 class RailwayStationsController < ApplicationController
-  before_action :set_railway_station, only: [:show, :edit, :update, :destroy]
+  before_action :set_railway_station, only: [:show, :edit, :update, :destroy, :update_position]
 
-  # GET /railway_stations
-  # GET /railway_stations.json
   def index
     @railway_stations = RailwayStation.all
   end
 
-  # GET /railway_stations/1
-  # GET /railway_stations/1.json
   def show
   end
 
@@ -61,6 +57,19 @@ class RailwayStationsController < ApplicationController
     end
   end
 
+  # def update_position
+  #   @route = Route.find(params[:route_id])
+  #   StationService.call(@railway_station, @route, params[:position])
+  # end
+
+  def update_position
+    @route = Route.find(params[:route_id])
+
+    @railway_station.update_position(@route, params[:station_position])
+    redirect_to route_path(@route)
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_railway_station
@@ -69,6 +78,6 @@ class RailwayStationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def railway_station_params
-      params.require(:railway_station).permit(:title)
+      params.require(:railway_station).permit(:title, :route_id, :station_position)
     end
 end
