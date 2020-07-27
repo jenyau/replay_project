@@ -100,5 +100,6 @@
   <%= car.number %><br>
 <% end %>
 
+<%= link_to "Добавить вагон", new_train_carriage_path(@train) %><br>
 <%= link_to 'Edit', edit_train_path(@train) %> |
 <%= link_to 'Back', trains_path %>

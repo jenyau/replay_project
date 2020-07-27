@@ -1,19 +1,20 @@
 class CoupeCarriagesController < ApplicationController
   before_action :set_coupe_carriage, only: [:show, :edit, :update, :destroy]
+  before_action :set_train, only: [:index, :new, :create]
 
   def index
-    @coupe_carriages = CoupeCarriage.all
+    @coupe_carriages = @train.carriages.coupe.all
   end
 
   def show
   end
 
   def new
-    @coupe_carriage = CoupeCarriage.new
+    @coupe_carriage = @train.carriages.coupe.new
   end
 
   def create
-    @coupe_carriage = CoupeCarriage.new(coupe_carriage_params)
+    @coupe_carriage = @train.carriages.coupe.new(coupe_carriage_params)
 
     if @coupe_carriage.save
       redirect_to @coupe_carriage
@@ -35,12 +36,16 @@ class CoupeCarriagesController < ApplicationController
 
   def destroy
     @coupe_carriage.destroy
-    redirect_to coupe_carriages_path
+    redirect_to trains_path
   end
 
   private
   def set_coupe_carriage
     @coupe_carriage = CoupeCarriage.find(params[:id])
+  end
+
+  def set_train
+    @train = Train.find(params[:train_id])
   end
 
   def coupe_carriage_params

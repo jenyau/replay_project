@@ -1,4 +1,4 @@
-<%= form_for(economy_carriage) do |form| %>
+<%= form_for [@train, economy_carriage] do |form| %>
   <%= render 'common/errors', resource: economy_carriage %>
 
   <div class="field">

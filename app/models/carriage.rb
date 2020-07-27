@@ -11,10 +11,10 @@ class Carriage < ApplicationRecord
   scope :desc,    ->{ order("number DESC")}
   private
   def generate_number
-    if train.carriages.empty?
+    if train.carriages.size <= 1
       self.number = 1
     else
-      self.number = train.carriages.last.number + 1
+      self.number = train.carriages[train.carriages.size - 2].number + 1
     end
   end
 

@@ -13,28 +13,10 @@ class Train < ApplicationRecord
       return total
     else
       carriages.where(type: carriage_type).each do |car|
-
         total += car.public_send(type_places.to_sym)
-
-
-
-
-        #   if type_places == "top_seats"
-      #     total += car.top_seats
-      #   elsif type_places == "bottom_seats"
-      #     total += car.bottom_seats
-      #   elsif type_places == "side_top_seats"
-      #     total += car.side_top_seats
-      #   elsif type_places == "side_bottom_seats"
-      #     total += car.side_bottom_seats
-      #   elsif type_places == "seat_places"
-      #     total += car.seat_places
-      #   else
-      #     total = 0
-      #   end
       end
     end
-    return  total
+    return total
   end
 
 end

@@ -11,10 +11,10 @@
   </thead>
 
   <tbody>
-   <%= render @carriages %>
+   <%= render @train.carriages %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New carriage', new_carriage_path %>
+<%= link_to 'New carriage', new_train_carriage_path(@train) %>

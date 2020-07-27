@@ -1,19 +1,20 @@
 class SvCarriagesController < ApplicationController
   before_action :set_sv_carriage, only: [:show, :edit, :update, :destroy]
+  before_action :set_train, only: [:index, :new, :create]
 
   def index
-    @sv_carriages = SvCarriage.all
+    @sv_carriages = @train.carriages.sv.all
   end
 
   def show
   end
 
   def new
-    @sv_carriage = SvCarriage.new
+    @sv_carriage = @train.carriages.sv.new
   end
 
   def create
-    @sv_carriage = SvCarriage.new(sv_carriage_params)
+    @sv_carriage = @train.carriages.sv.new(sv_carriage_params)
 
     if @sv_carriage.save
       redirect_to @sv_carriage
@@ -35,12 +36,16 @@ class SvCarriagesController < ApplicationController
 
   def destroy
     @sv_carriage.destroy
-    redirect_to sv_carriages_path
+    redirect_to trains_path
   end
 
   private
   def set_sv_carriage
     @sv_carriage = SvCarriage.find(params[:id])
+  end
+
+  def set_train
+    @train = Train.find(params[:train_id])
   end
 
   def sv_carriage_params

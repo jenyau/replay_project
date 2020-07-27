@@ -3,4 +3,4 @@
 <%= render 'form', economy_carriage: @economy_carriage %>
 
 <%= link_to 'Show', @economy_carriage %> |
-<%= link_to 'Back', economy_carriages_path %>
+<%= link_to 'Back', train_economy_carriages_path(@economy_carriage.train) %>
