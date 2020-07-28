@@ -9,12 +9,14 @@ class Carriage < ApplicationRecord
   scope :economy, ->{ where(type: 'EconomyCarriage') }
   scope :ordered, ->{ order(:number) }
   scope :desc,    ->{ order("number DESC")}
+
   private
+
   def generate_number
-    if train.carriages.size <= 1
+    if train.carriages.count == 0
       self.number = 1
     else
-      self.number = train.carriages[train.carriages.size - 2].number + 1
+      self.number = train.carriages.map(&:number).compact.max + 1
     end
   end
 
@@ -24,3 +26,30 @@ class Carriage < ApplicationRecord
     end
   end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+#   def generate_number
+#     if train.carriages.size <= 1
+#       self.number = 1
+#     else
+#       self.number = train.carriages[train.carriages.size - 2].number + 1
+#     end
+#   end
+
+#   def unique_number
+#     if train.carriages.where(number: self.number).first
+#       errors.add(:base, "number errors validates")
+#     end
+#   end
+# end

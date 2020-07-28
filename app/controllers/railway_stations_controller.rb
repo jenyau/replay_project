@@ -1,5 +1,6 @@
 class RailwayStationsController < ApplicationController
-  before_action :set_railway_station, only: [:show, :edit, :update, :destroy, :update_position]
+  skip_before_action :verify_authenticity_token
+  before_action :set_railway_station, only: [:show, :edit, :update, :destroy, :update_position, :update_time_position]
 
   def index
     @railway_stations = RailwayStation.all
@@ -47,13 +48,10 @@ class RailwayStationsController < ApplicationController
     end
   end
 
-  # DELETE /railway_stations/1
-  # DELETE /railway_stations/1.json
   def destroy
     @railway_station.destroy
     respond_to do |format|
       format.html { redirect_to railway_stations_url, notice: 'Railway station was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -69,6 +67,12 @@ class RailwayStationsController < ApplicationController
     redirect_to route_path(@route)
   end
 
+  def update_time_position
+    @route = Route.find(params[:route_id])
+
+    @railway_station.update_time_position(@route, params[:arrival_time], params[:departure_time])
+    redirect_to route_path(@route)
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -78,6 +82,6 @@ class RailwayStationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def railway_station_params
-      params.require(:railway_station).permit(:title, :route_id, :station_position)
+      params.require(:railway_station).permit(:title, :route_id, :station_position, :arrival_time, :departure_time)
     end
 end
