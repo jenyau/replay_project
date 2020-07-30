@@ -21,6 +21,12 @@
   <li>Не указано</li>
 <% else %>
   <table>
+  <th>title</th>
+  <th>position</th>
+  <th>change</th>
+  <th>arrival time</th>
+  <th>departure time</th>
+  <th>change</th>
     <tbody>
       <% @route.railway_stations.ordered.each do |station| %>
         <tr>
@@ -32,8 +38,13 @@
             </td>
             <td><%= submit_tag %></td>
           <% end %>
-            <td><%= text_field_tag :arrival_time, station.position_in_arrival_time(@route.id) %></td>
-            <td><%= text_field_tag :departure_time, station.position_in_departure_time(@route.id) %></td>
+
+          <%= form_tag update_time_position_railway_station_path(station), method: :patch do %>
+            <%= hidden_field_tag :route_id, @route.id %>
+            <td><%= time_field_tag :arrival_time, station.position_in_arrival_time(@route.id) %></td>
+            <td><%= time_field_tag :departure_time, station.position_in_departure_time(@route.id) %></td>
+            <td><%= submit_tag %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

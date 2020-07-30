@@ -1,0 +1,41 @@
+<h1>results</h1>
+<h2><%= @start_station.title %> - <%= @end_station.title %></h2>
+
+
+<strong>Список поездов</strong><br>
+<table>
+  <th>name</th>
+  <th>arrival time</th>
+  <th>departure time</th>
+  <th>name</th>
+  <tbody>
+
+<% if @routes.empty? %>
+  <tr>
+    <td>Не указано</td>
+  </tr>
+   <% else %>
+    <% @routes.each do |route| %>
+      <% if route.trains.empty? %>
+        <td>Не указано</td>
+      <% else %>
+        <% route.trains.each do |train| %>
+          <tr>
+            <td><%= train.number %></td>
+            <td><%= @start_station.position_in_arrival_time(route) %></td>
+            <td><%= @end_station.position_in_departure_time(route) %></td>
+            <% byebug %>
+            <td>
+              <%= form_tag new_user_ticket_path(User.first), method: :get do %>
+                <%= hidden_field_tag :train_id, train.id %>
+                <%= submit_tag %>
+                <% end %>
+            </td>
+          </tr>
+        <% end %>
+    <% end %>
+    <% end %>
+<% end %>
+
+  </tbody>
+</table>

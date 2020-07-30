@@ -1,8 +1,9 @@
-<%= form_for(ticket) do |form| %>
+<%= form_for [@user, ticket] do |form| %>
   <%= render 'common/errors', resource: ticket %>
   <div class="field">
     <%= form.label :passenger_name %>
     <%= form.text_field :passenger_name %>
+    <%= hidden_field_tag :train_id, @train.id %>
   </div>
 
   <div class="actions">

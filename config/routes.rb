@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root 'welcome#index'
-  resources :users
-  resources :tickets
+  resources :users do
+    resources :tickets, shallow: true
+  end
   resources :trains do
     resources :carriages, shallow: true
     resources :coupe_carriages, shallow: true
@@ -14,5 +15,6 @@ Rails.application.routes.draw do
     patch :update_position, on: :member
     patch :update_time_position, on: :member
   end
+  resource :search, only: [:new, :show, :create]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

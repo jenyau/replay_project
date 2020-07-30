@@ -23,14 +23,23 @@ class RailwayStation < ApplicationRecord
   end
 
   def position_in_arrival_time(route)
-   station_route = station_route(route)
-    station_route.arrival_time if station_route
+    station_route = station_route(route)
+    if station_route.present? && station_route.arrival_time.present?
+      station_route.arrival_time.strftime("%H:%M")
+    else
+      return nil
+    end
   end
 
   def position_in_departure_time(route)
-   station_route = station_route(route)
-    station_route.departure_time if station_route
+    station_route = station_route(route)
+    if station_route.present? && station_route.departure_time.present?
+      station_route.departure_time.strftime("%H:%M")
+    else
+      return nil
+    end
   end
+
   private
   def station_route(route)
     railway_stations_routes.find_by(route: route)

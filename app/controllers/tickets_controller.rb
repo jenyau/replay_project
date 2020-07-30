@@ -1,19 +1,22 @@
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_user, only: [:create, :index, :new]
   def index
-    @tickets = Ticket.all
+    @tickets = @user.tickets.all
   end
 
   def show
   end
 
   def new
-    @ticket = Ticket.new
+    @ticket = @user.tickets.new
+    @train = Train.find(params[:train_id])
   end
 
   def create
-    @ticket = Ticket.new(ticket_params)
+    @ticket = @user.tickets.new(ticket_params)
+    @train = Train.find(params[:train_id])
+    @ticket.train = @train
 
     if @ticket.save
       redirect_to @ticket
@@ -35,7 +38,7 @@ class TicketsController < ApplicationController
 
   def destroy
     @ticket.destroy
-    redirect_to tickets_path
+    redirect_to user_tickets_path(@ticket.user)
   end
 
   private
@@ -43,12 +46,11 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
   end
 
+  def set_user
+    @user = User.find(params[:user_id])
+  end
+
   def ticket_params
-    params.require(:ticket).permit(:passenger_name)
+    params.require(:ticket).permit(:passenger_name, :user_id, :train_id)
   end
 end
-
-
-
-
-
