@@ -24,12 +24,13 @@
             <td><%= train.number %></td>
             <td><%= @start_station.position_in_arrival_time(route) %></td>
             <td><%= @end_station.position_in_departure_time(route) %></td>
-            <% byebug %>
             <td>
-              <%= form_tag new_user_ticket_path(User.first), method: :get do %>
-                <%= hidden_field_tag :train_id, train.id %>
-                <%= submit_tag %>
+              <% if user_signed_in? %>
+                <%= form_tag new_user_ticket_path(current_user), method: :get do %>
+                  <%= hidden_field_tag :train_id, train.id %>
+                  <%= submit_tag %>
                 <% end %>
+              <% end %>
             </td>
           </tr>
         <% end %>

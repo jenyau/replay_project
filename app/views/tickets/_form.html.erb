@@ -3,7 +3,7 @@
   <div class="field">
     <%= form.label :passenger_name %>
     <%= form.text_field :passenger_name %>
-    <%= hidden_field_tag :train_id, @train.id %>
+    <%= hidden_field_tag :train_id, @train.id if ticket.new_record? %>
   </div>
 
   <div class="actions">

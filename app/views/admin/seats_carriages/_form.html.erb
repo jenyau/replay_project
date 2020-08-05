@@ -1,0 +1,19 @@
+<%= form_for [:admin, @train, seats_carriage] do |form| %>
+  <%= render 'common/errors', resource: seats_carriage %>
+
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.text_field :number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :train %>
+    <%= form.collection_select :train_id, Train.all, :id, :number %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+<% end %>

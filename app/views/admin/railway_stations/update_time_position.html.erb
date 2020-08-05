@@ -1,0 +1,26 @@
+<% if @route.railway_stations.empty? %>
+  <li>Не указано</li>
+<% else %>
+  <table>
+    <tbody>
+      <% @route.railway_stations.ordered.each do |station| %>
+        <tr>
+          <td><%= station.title %></td>
+          <%= form_tag update_position_admin_railway_station_path(station), method: :patch do %>
+            <td>
+              <%= hidden_field_tag :route_id, @route.id %>
+              <%= number_field_tag :station_position, station.position_in(@route.id) %>
+            </td>
+            <td><%= submit_tag %></td>
+          <% end %>
+          <%= form_tag update_time_position_admin_railway_station_path(station), method: :patch do %>
+            <%= hidden_field_tag :route_id, @route.id %>
+            <td><%= time_field_tag :arrival_time, station.position_in_arrival_time(@route.id) %></td>
+            <td><%= time_field_tag :departure_time, station.position_in_departure_time(@route.id) %></td>
+            <td><%= submit_tag %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

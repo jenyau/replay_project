@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+<p><strong><%= "#{@coupe_carriage.type}" %></p></strong>
+
+<p>
+  <strong>Number:</strong>
+  <%= @coupe_carriage.number %>
+</p>
+<strong>Присоединен к поезду</strong>
+<% if @coupe_carriage.train %>
+  <p><%= @coupe_carriage.train.number %></p>
+<% else %>
+  <p>Не указано</p>
+<% end %>
+
+<p>
+<strong>Top seats:</strong>
+<% if @coupe_carriage.top_seats.present? %>
+  <%= @coupe_carriage.top_seats %>
+<% else %>
+  не указано
+<% end %>
+</p>
+
+<p>
+<strong>Bottom seats:</strong>
+<% if @coupe_carriage.bottom_seats.present? %>
+  <%= @coupe_carriage.bottom_seats %>
+<% else %>
+  не указано
+<% end %>
+</p>
+
+<%= link_to 'Edit', edit_admin_coupe_carriage_path(@coupe_carriage) %>
+<%= link_to 'Back', admin_train_coupe_carriages_path(@coupe_carriage.train) %>

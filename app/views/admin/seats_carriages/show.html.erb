@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+<p><strong><%= "#{@seats_carriage.type}" %></p></strong>
+
+<p>
+  <strong>Number:</strong>
+  <%= @seats_carriage.number %>
+</p>
+<strong>Присоединен к поезду</strong>
+<% if @seats_carriage.train %>
+  <p><%= @seats_carriage.train.number %></p>
+<% else %>
+  <p>Не указано</p>
+<% end %>
+<p>
+<strong>Seat places:</strong>
+<% if @seats_carriage.seat_places.present? %>
+  <%= @seats_carriage.seat_places %>
+<% else %>
+  не указано
+<% end %>
+</p>
+
+<%= link_to 'Edit', edit_admin_seats_carriage_path(@seats_carriage) %>
+<%= link_to 'Back', admin_train_seats_carriages_path(@seats_carriage.train) %>

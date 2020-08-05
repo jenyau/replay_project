@@ -5,5 +5,27 @@
   <%= @user.name %>
 </p>
 
+
+  <strong>Список всех ваших билетов:</strong>
+  <% if @user.tickets.empty? %>
+    Нет билетов
+  <% else %>
+    <table>
+      <thead>
+        <th>Имя</th>
+        <th>Поезд</th>
+      </thead>
+      <tbody>
+        <% @user.tickets.each do |ticket| %>
+          <tr>
+            <td><%= ticket.passenger_name %></td>
+            <td><%= "№ #{ticket.train.number}" %><br></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+<p>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+</p>
