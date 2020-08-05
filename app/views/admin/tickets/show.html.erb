@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @ticket.passenger_name %>
+</p>
+
+<p>
+  <strong>Принадлежит пользователю:</strong>
+  <% if @ticket.user %>
+    <%= @ticket.user.name %>
+  <% else %>
+    <li>Не указано</li>
+  <% end %>
+</p>
+
+<p>
+  <strong>На поезд №</strong>
+  <% if @ticket.train %>
+    <%= @ticket.train.number %>
+  <% else %>
+   <li>Не указано</li>
+  <% end %>
+</p>
+
+<p>
+<strong>Маршрут:</strong>
+<% if @ticket.train.route.railway_stations.first.present? %>
+  <%= @ticket.train.route.railway_stations.first.title %>
+  -
+  <%= @ticket.train.route.railway_stations.last.title %>
+<% else %>
+  Not enter
+<% end %>
+</p>
+
+<%= link_to 'Edit', admin_ticket_path(@ticket) %>
+<%= link_to 'Back', admin_tickets_path %>

@@ -1,0 +1,21 @@
+<%= form_for [:admin, ticket] do |form| %>
+  <%= render 'common/errors', resource: ticket %>
+  <div class="field">
+    <%= form.label :passenger_name %>
+    <%= form.text_field :passenger_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :train %>
+    <%= select_tag :train_id, options_from_collection_for_select(Train.all , :id , :number) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user %>
+    <%= form.collection_select :user_id, User.all, :id, :name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
