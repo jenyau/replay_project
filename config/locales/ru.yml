@@ -1,0 +1,12 @@
+ru:
+  common:
+    errors: "При заполнении формы возникли ошибки"
+    back: "Назад"
+    create: "Создать"
+    change: "Изменить"
+  admin:
+    railway_stations:
+      new:
+        title: "Новая станция"
+      form:
+        submit: "Создать"
