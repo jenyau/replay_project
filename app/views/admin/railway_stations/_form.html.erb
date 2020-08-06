@@ -5,7 +5,7 @@
     <%= form.text_field :title %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions btn">
+    <%= form.submit "#{ railway_station.new_record? ? t('common.create') : t('common.change') }" %>
   </div>
 <% end %>
