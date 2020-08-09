@@ -1,6 +1,12 @@
 <tr>
-  <td><%= railway_station.title %></td>
+  <td class="railway_station_title_<%= "#{railway_station.id}" %>"><%= railway_station.title %></td>
   <td><%= link_to 'Show', [:admin, railway_station] %></td>
-  <td><%= link_to 'Edit', edit_admin_railway_station_path(railway_station) %></td>
+  <td>
+    <%= link_to 'Edit','', id: "edit_station_id_#{railway_station.id}", class: "edit_station", data: {station: railway_station.id} %>
+   <%= render 'form', railway_station: railway_station, hidden: true %>
+  </td>
   <td><%= link_to 'Destroy', [:admin, railway_station], method: :delete, data: { confirm: 'Are you sure?' } %></td>
 </tr>
+
+
+<%= javascript_pack_tag 'railway_stations', 'data-turbolinks-track': 'reload' %>

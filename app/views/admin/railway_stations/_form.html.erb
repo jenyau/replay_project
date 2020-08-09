@@ -1,7 +1,7 @@
-<%= form_with(model: [:admin, railway_station], local: true) do |form| %>
+<%= form_with(model: [:admin, railway_station], local: true, id: "form_station_id_#{railway_station.id}", html: {style: "display:#{hidden ? 'none' : 'block'}"}) do |form| %>
   <%= render 'common/errors', resource: railway_station %>
   <div class="field">
-    <%= form.label :title %>
+
     <%= form.text_field :title %>
   </div>
 
