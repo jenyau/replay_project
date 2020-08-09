@@ -3,8 +3,7 @@ class ApplicationController < ActionController::Base
     if current_user.admin?
       root_path
     else
-      edit_user_path(current_user) #your path
+      new_search_path #your path
     end
   end
-
 end
