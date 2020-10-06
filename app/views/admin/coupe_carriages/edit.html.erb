@@ -1,3 +1,6 @@
 <h1>Editing Coupe carriage</h1>
 
 <%= render 'form', coupe_carriage: @coupe_carriage %>
+
+<%= link_to 'Show', [:admin, @coupe_carriage] %>
+<%= link_to 'Back', admin_train_coupe_carriages_path(@coupe_carriage.train) %>
