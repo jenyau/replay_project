@@ -8,7 +8,7 @@
 <p>
   <strong>Принадлежит пользователю:</strong>
   <% if @ticket.user %>
-    <%= @ticket.user.name %>
+    <%= @ticket.user.email %>
   <% else %>
     <li>Не указано</li>
   <% end %>
