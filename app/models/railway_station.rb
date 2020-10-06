@@ -11,7 +11,6 @@ class RailwayStation < ApplicationRecord
     station_route.update(departure_time: departure_time)
   end
 
-
   def update_position(route, station_position)
    station_route = station_route(route)
     station_route.update(station_position: station_position) if station_route

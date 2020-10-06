@@ -7,7 +7,7 @@ $(document).on('turbolinks:load', function() {
     end_station = $('#end_station_id');
 
     if(start_station.val() == end_station.val()){
-      alert("Invalid error");
+
       return false;
     }
   })
